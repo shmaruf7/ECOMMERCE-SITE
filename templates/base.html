@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Shop{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/">🛍️ E-Shop</a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/cart" class="cart-link">
+                🛒 Cart
+                {% set cart = session.get('cart', {}) %}
+                {% set total_qty = cart.values()|sum %}
+                {% if total_qty > 0 %}
+                <span class="cart-badge">{{ total_qty }}</span>
+                {% endif %}
+            </a>
+        </div>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

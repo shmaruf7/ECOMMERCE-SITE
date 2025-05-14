@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Your Cart{% endblock %}
+{% block content %}
+
+<h1>Your Shopping Cart</h1>
+
+{% if items %}
+<form method="POST" action="/update_cart" class="cart-form">
+    <div class="cart-grid">
+        {% for item in items %}
+        <div class="cart-item">
+            <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
+            <div class="item-details">
+                <strong>{{ item.product.name }}</strong>
+                <p>Price: {{ item.product.price }} TK</p>
+                <label>
+                    Qty:
+                    <input type="number" name="qty_{{ item.product.id }}" value="{{ item.qty }}" min="0">
+                </label>
+                <p>Total: {{ item.product.price * item.qty }} TK</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="cart-actions">
+        <button type="submit">Update Cart</button>
+    </div>
+</form>
+
+<!-- Separate form for clearing the cart -->
+<form method="POST" action="/clear_cart" class="cart-actions">
+    <button type="submit" class="danger">Clear Cart</button>
+</form>
+
+<h3>Total: {{ total }} TK</h3>
+<hr>
+<h2>Delivery Info</h2>
+<form method="POST" action="/confirm_order" class="order-form">
+    <input type="text" name="phone" placeholder="Phone number" required>
+    <textarea name="address" placeholder="Delivery address" required></textarea>
+    <button type="submit">Confirm Order</button>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+{% endblock %}

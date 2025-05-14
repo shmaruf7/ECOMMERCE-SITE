@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Order Confirmed{% endblock %}
+{% block content %}
+<h1>Order Summary</h1>
+<ul>
+    {% for item in items %}
+    <li>{{ item.product.name }} x {{ item.qty }} = {{ item.product.price * item.qty }} TK</li>
+    {% endfor %}
+</ul>
+<p>Subtotal: {{ total }} TK</p>
+<p>Delivery: {{ delivery }} TK</p>
+<h3>Total: {{ grand_total }} TK</h3>
+<p>Phone: {{ phone }}</p>
+<p>Address: {{ address }}</p>
+{% endblock %}

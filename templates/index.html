@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Welcome to E-Shop</h1>
+<div class="grid">
+    {% for category in categories %}
+    <div class="card">
+        <a href="/category/{{ category.id }}">
+            <img src="{{ category.image }}" alt="{{ category.name }}">
+        </a>
+        <h2>{{ category.name }}</h2>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
