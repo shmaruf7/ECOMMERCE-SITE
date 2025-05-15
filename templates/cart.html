@@ -5,35 +5,25 @@
 <h1>Your Shopping Cart</h1>
 
 {% if items %}
-<form method="POST" action="/update_cart" class="cart-form">
-    <div class="cart-grid">
-        {% for item in items %}
-        <div class="cart-item" style="display: flex; ">
-            <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
-            <div class="item-details">
-                <strong>{{ item.product.name }}</strong>
-                <p>Price: {{ item.product.price }} TK</p>
-                <label>
-                    Qty:
-                    <input type="number" name="qty_{{ item.product.id }}" value="{{ item.qty }}" min="0">
-                </label>
-                <p>Total: {{ item.product.price * item.qty }} TK</p>
-            </div>
+<form method="POST" action="/update_cart">
+    {% for item in items %}
+    <div class="cart-item">
+        <img src="{{ item.product.image }}" alt="{{ item.product.name }}" style="width:80px">
+        <div class="cart-details">
+            <strong>{{ item.product.name }}</strong><br>
+            <input type="number" name="qty_{{ item.product.id }}" value="{{ item.qty }}" min="0">
+            <span>{{ item.product.price * item.qty }} TK</span>
         </div>
-        {% endfor %}
     </div>
-    
+    {% endfor %}
+    <button type="submit" class="update-btn">Update Cart</button>
 </form>
 
-<!-- Separate form for clearing the cart -->
- <div style="display: flex;">
-    <div class="cart-actions">
-        <button type="submit">Update Cart</button>
-    </div>
+ 
 <form method="POST" action="/clear_cart" class="cart-actions">
-    <button type="submit" class="danger" style="background-color: brown; margin-left: 40px;">Clear Cart</button>
+    <button type="submit" class="danger" style="background-color: brown; margin-top: 10px; width: 104px ;">Clear Cart</button>
 </form>
- </div>
+ 
 
 <h3>Total: {{ total }} TK</h3>
 <hr>

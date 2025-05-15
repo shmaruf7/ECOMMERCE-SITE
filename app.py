@@ -70,13 +70,19 @@ def cart():
 def update_cart():
     cart = session.get('cart', {})
     for pid in list(cart.keys()):
-        qty = int(request.form.get(f'qty_{pid}', 1))
-        if qty > 0:
-            cart[pid] = qty
-        else:
-            del cart[pid]
+        qty_str = request.form.get(f'qty_{pid}')
+        if qty_str is not None:
+            try:
+                qty = int(qty_str)
+                if qty > 0:
+                    cart[pid] = qty
+                else:
+                    del cart[pid]
+            except ValueError:
+                pass  # Ignore invalid input
     session['cart'] = cart
     return redirect(url_for('cart'))
+
 
 @app.route('/confirm_order', methods=['POST'])
 def confirm_order():
