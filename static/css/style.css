@@ -172,4 +172,7 @@ form textarea {
         flex-direction: column;
         text-align: center;
     }
+    main {
+    padding: 2rem;
+}
 }
