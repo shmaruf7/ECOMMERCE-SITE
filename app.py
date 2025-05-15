@@ -45,7 +45,9 @@ def add_to_cart():
     cart = session.get('cart', {})
     cart[str(prod_id)] = cart.get(str(prod_id), 0) + 1
     session['cart'] = cart
-    return redirect('/cart')
+    return redirect(request.referrer or url_for('index'))
+
+
 @app.route('/clear_cart', methods=['POST'])
 def clear_cart():
     session['cart'] = {}

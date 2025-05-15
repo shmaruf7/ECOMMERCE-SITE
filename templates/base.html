@@ -13,14 +13,13 @@
         </div>
         <div class="nav-links">
             <a href="/">Home</a>
-            <a href="/cart" class="cart-link">
-                🛒 Cart
-                {% set cart = session.get('cart', {}) %}
-                {% set total_qty = cart.values()|sum %}
-                {% if total_qty > 0 %}
-                <span class="cart-badge">{{ total_qty }}</span>
-                {% endif %}
-            </a>
+           <a href="/cart">
+    🛒 Cart
+    {% if session.cart %}
+        <span class="cart-count">{{ session.cart | length }}</span>
+    {% endif %}
+</a>
+
         </div>
     </nav>
     <main>

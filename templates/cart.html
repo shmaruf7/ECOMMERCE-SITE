@@ -8,7 +8,7 @@
 <form method="POST" action="/update_cart" class="cart-form">
     <div class="cart-grid">
         {% for item in items %}
-        <div class="cart-item">
+        <div class="cart-item" style="display: flex; ">
             <img src="{{ item.product.image }}" alt="{{ item.product.name }}">
             <div class="item-details">
                 <strong>{{ item.product.name }}</strong>
@@ -22,15 +22,18 @@
         </div>
         {% endfor %}
     </div>
-    <div class="cart-actions">
-        <button type="submit">Update Cart</button>
-    </div>
+    
 </form>
 
 <!-- Separate form for clearing the cart -->
+ <div style="display: flex;">
+    <div class="cart-actions">
+        <button type="submit">Update Cart</button>
+    </div>
 <form method="POST" action="/clear_cart" class="cart-actions">
-    <button type="submit" class="danger">Clear Cart</button>
+    <button type="submit" class="danger" style="background-color: brown; margin-left: 40px;">Clear Cart</button>
 </form>
+ </div>
 
 <h3>Total: {{ total }} TK</h3>
 <hr>
@@ -38,7 +41,7 @@
 <form method="POST" action="/confirm_order" class="order-form">
     <input type="text" name="phone" placeholder="Phone number" required>
     <textarea name="address" placeholder="Delivery address" required></textarea>
-    <button type="submit">Confirm Order</button>
+    <button type="submit" style="background-color: green; font-weight: 500; color: aliceblue;">Confirm Order</button>
 </form>
 {% else %}
 <p>Your cart is empty.</p>
